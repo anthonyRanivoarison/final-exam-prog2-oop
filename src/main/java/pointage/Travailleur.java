@@ -42,4 +42,10 @@ public class Travailleur {
 
         return dateFin.toEpochDay() - dateDebut.toEpochDay() - 1;
     }
+
+    public long calculerSalairePrestataireDonneEntreDeuxDates(LocalDate dateDebut, LocalDate dateFin) {
+        long difference = dateDebut.toEpochDay() - dateFin.toEpochDay();
+        var listPromotions = new SalaireMensuel().avoirListeDesPromotionsEntreDeuxDates(dateDebut, dateFin);
+        return difference + listPromotions.size();
+    }
 }

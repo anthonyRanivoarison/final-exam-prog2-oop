@@ -48,4 +48,17 @@ class TravailleurTest {
         long attendu = john.avoirNombreTotalDeJoursEntreDeuxDates(dateDebut, dateFin);
         assertEquals(9, attendu);
     }
+
+    @Test
+    void avoirSalairePrestataireDonneEntreDeuxDates() {
+        LocalDate dateDebut = LocalDate.of(2025, 9, 1);
+        LocalDate dateFin = LocalDate.of(2025, 12, 31);
+        var promotions = List.of(
+                new Promotion(LocalDate.of(2025, 9, 15), LocalDate.of(2025, 10, 15), "Promotion 1"),
+                new Promotion(LocalDate.of(2025, 11, 1), LocalDate.of(2025, 11, 30), "Promotion 2")
+        );
+        SalaireMensuel.setPromotions(promotions);
+        long salaire = john.calculerSalairePrestataireDonneEntreDeuxDates(dateDebut, dateFin);
+        assertEquals(122 + promotions.size(), salaire);
+    }
 }
